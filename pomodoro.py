@@ -53,102 +53,107 @@ break_time = break_time.hour*3600 + break_time.minute*60 + break_time.second
 
 #if the button is clicked:
 if button:
-    #create containers to display a messages1
-    Message1   = sl.empty()
+    #check if the user has set a time:
+    if study_time == 0 or break_time == 0:
+        sl.warning("Please select the time")
     
-    #create the progress bar:
-    bar = sl.progress(0)
-
-    #create containers to display a messages2
-    percentage = sl.empty()
-    Message2   = sl.empty()
-    
-    #for each set:
-    for set in range(sets):
-        #creating study time:
-        #changing the progress bar color
-        sl.markdown(
-            """
-            <style>
-                .stProgress > div > div > div >div {
-                    background-color: red;
-                }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
-        #displaying the message1:
-        Message1.write(":red[Study Time]")
-
-        #study time loop:
-        lv = study_time//100
-        for i in range(lv,study_time+lv,lv):
-            #updating the progress:
-            bar.progress(i//lv)
-
-            #updating the percentage:
-            percentage.write(str(i//lv)+"%")
-
-            #updating the message2:
-            if i//lv <25:
-                Message2.write("Effort!")
-            elif 25<=i//lv <50:
-                Message2.write("We can do this!")
-            elif 50<=i//lv <75:
-                Message2.write("We are getting there!")
-            elif 75<=i//lv<100:
-                Message2.write("Almost there!")
-            else:
-                Message2.write("Great Job!")
-            
-            #setting sleep time:
-            ts.sleep(lv)
+    else:
+        #create containers to display a messages1
+        Message1   = sl.empty()
         
-        #creating break time:
-        #changing the progress bar color
-        sl.markdown(
-            """
-            <style>
-                .stProgress > div > div > div >div {
-                    background-color: green;
-                }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
-        #displaying the message1:
-        Message1.write(":green[Break Time!] :sunglasses:")
+        #create the progress bar:
+        bar = sl.progress(0)
 
-        #break time loop:
-        lv = break_time//100
-        for i in range(lv,break_time+lv,lv):
-            #updating the progress:
-            bar.progress(i//lv)
+        #create containers to display a messages2
+        percentage = sl.empty()
+        Message2   = sl.empty()
+        
+        #for each set:
+        for set in range(sets):
+            #creating study time:
+            #changing the progress bar color
+            sl.markdown(
+                """
+                <style>
+                    .stProgress > div > div > div >div {
+                        background-color: red;
+                    }
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+            #displaying the message1:
+            Message1.write(":red[Study Time]")
 
-            #updating the percentage:
-            percentage.write(str(i//lv)+"%")
+            #study time loop:
+            lv = study_time//100
+            for i in range(lv,study_time+lv,lv):
+                #updating the progress:
+                bar.progress(i//lv)
 
-            #updating the message2:
-            if i//lv <25:
-                Message2.write("Great job!")
-            elif 25<=i//lv <50:
-                Message2.write("Relax!")
-            elif 50<=i//lv <75:
-                Message2.write("Impressive!")
-            elif 75<=i//lv<100:
-                Message2.write("start warming up!")
-            else:
-                Message2.write("Effort!")
-            #setting sleep time:
-            ts.sleep(lv)
-    
-    #closing messages:
-    Message1.write("You have finished the set")
-    Message2.write("Congratulations!!")
-    percentage.write("100%")
-    bar.progress(100)
+                #updating the percentage:
+                percentage.write(str(i//lv)+"%")
 
-    sl.caption("click the button to restart the timer!")
+                #updating the message2:
+                if i//lv <25:
+                    Message2.write("Effort!")
+                elif 25<=i//lv <50:
+                    Message2.write("We can do this!")
+                elif 50<=i//lv <75:
+                    Message2.write("We are getting there!")
+                elif 75<=i//lv<100:
+                    Message2.write("Almost there!")
+                else:
+                    Message2.write("Great Job!")
+                
+                #setting sleep time:
+                ts.sleep(lv)
+            
+            #creating break time:
+            #changing the progress bar color
+            sl.markdown(
+                """
+                <style>
+                    .stProgress > div > div > div >div {
+                        background-color: green;
+                    }
+                </style>
+                """,
+                unsafe_allow_html=True,
+            )
+            #displaying the message1:
+            Message1.write(":green[Break Time!] :sunglasses:")
+
+            #break time loop:
+            lv = break_time//100
+            for i in range(lv,break_time+lv,lv):
+                #updating the progress:
+                bar.progress(i//lv)
+
+                #updating the percentage:
+                percentage.write(str(i//lv)+"%")
+
+                #updating the message2:
+                if i//lv <25:
+                    Message2.write("Great job!")
+                elif 25<=i//lv <50:
+                    Message2.write("Relax!")
+                elif 50<=i//lv <75:
+                    Message2.write("Impressive!")
+                elif 75<=i//lv<100:
+                    Message2.write("start warming up!")
+                else:
+                    Message2.write("Effort!")
+                #setting sleep time:
+                ts.sleep(lv)
+        
+        #closing messages:
+        Message1.write("You have finished the set")
+        Message2.write("Congratulations!!")
+        percentage.write("100%")
+        bar.progress(100)
+
+        sl.caption("click the button to restart the timer!")
             
 #else prompt the user to start the timer
 else:
