@@ -37,18 +37,19 @@ Welcome to Pomodoro
 )
 
 #taking user inputs:
-sets = sl.number_input("Enter number of sets",min_value=1, max_value=4)
-study_time = sl.time_input("Enter number of minutes you want to study", value= datetime.time(0,0,0), step = datetime.timedelta(seconds=1500))
-break_time = sl.time_input("Enter number of minutes you want to take a break", value = datetime.time(0,0,0), step = datetime.timedelta(seconds = 300))
-
+with sl.form("form1"):
+    sets = sl.number_input("Enter number of sets",min_value=1, max_value=4)
+    study_time = sl.time_input("Enter number of minutes you want to study", value= datetime.time(0,0,0), step = datetime.timedelta(seconds=1500))
+    break_time = sl.time_input("Enter number of minutes you want to take a break", value = datetime.time(0,0,0), step = datetime.timedelta(seconds = 300))
+    button = sl.form_submit_button("START")
 #calculating times in seconds:
 study_time = study_time.hour*3600 + study_time.minute*60 + study_time.second
 break_time = break_time.hour*3600 + break_time.minute*60 + break_time.second
 
-#creating the start button:
-cols = sl.columns(7)
-with cols[3]:
-    button =  sl.button("START")
+# #creating the start button:
+# cols = sl.columns(7)
+# with cols[3]:
+#     button =  sl.button("START")
 
 #if the button is clicked:
 if button:
